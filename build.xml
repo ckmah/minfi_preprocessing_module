@@ -28,6 +28,15 @@
 
 <project basedir="" default="devReleaseModule" name="MinfiPreprocessing">
 
+    <target name="test">
+        <path id="example.path">
+        <fileset dir=".">
+            <include name="*" />
+        </fileset>
+        </path>
+        <echo message="My build-path is ${toString:example.path}" />
+    </target>
+
     <target name="init">
         <tstamp />
         <property name="test.version" value="999999999"/>
@@ -68,7 +77,7 @@
 
     <target name="create-zip" depends="addLSIDtoManifest">
         <zip destfile="${dest.dir}/${ant.project.name}.zip" whenempty="fail" defaultexcludes="true">
-            <fileset dir="." includes="*.html, *.py, *.json, manifest, *.txt, *.R"/>
+            <fileset dir="." includes="*.html, *.py, *.json, manifest, *.txt, *.R, *.foo"/>
         </zip>
     </target>
 

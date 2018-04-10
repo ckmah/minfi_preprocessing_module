@@ -1,7 +1,8 @@
+#Tue, 10 Apr 2018 11:26:57 -0700
 #MinfiPreprocessing
 #Tue Apr 10 13:35:03 EDT 2018
 JVMLevel=
-LSID=urn\:lsid\:8080.genepatt.genepattern.broadinstitute.org\:genepatternmodules\:8982\:0.1.9
+LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00367\:999999999
 author=Clarence Mah;Mesirov Lab
 commandLine=<R3.2_Rscript> <libdir>run.R -d <dataset> -n <normalization> -t <output.type>
 cpuType=any
@@ -51,7 +52,9 @@ p3_type=java.lang.String
 p3_value=beta\=beta;m-values\=m-values
 privacy=private
 quality=development
-taskDoc=http://software.broadinstitute.org/cancer/software/genepattern/modules/docs/MinfiPreprocessing/1
+taskDoc=http\://software.broadinstitute.org/cancer/software/genepattern/modules/docs/MinfiPreprocessing/1
 taskType=
 userid=ckmah
 version=
+
+publicationDate=04/10/2018 11\:26 
