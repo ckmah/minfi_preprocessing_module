@@ -1,0 +1,57 @@
+#MinfiPreprocessing
+#Tue Apr 10 13:35:03 EDT 2018
+JVMLevel=
+LSID=urn\:lsid\:8080.genepatt.genepattern.broadinstitute.org\:genepatternmodules\:8982\:0.1.9
+author=Clarence Mah;Mesirov Lab
+commandLine=<R3.2_Rscript> <libdir>run.R -d <dataset> -n <normalization> -t <output.type> 
+cpuType=any
+description=Methylation array preprocessing with the R package minfi. Compatible with either 450k or EPIC array data.
+fileFormat=pdf;txt
+language=R
+name=MinfiPreprocessing
+os=any
+p1_MODE=IN
+p1_TYPE=FILE
+p1_default_value=
+p1_description=Provide a ZIP or GZ file containing the methylation microarray data in the Illumina Demo Dataset folder structure. See documentation for more details.
+p1_fileFormat=.gz;zip
+p1_flag=-d 
+p1_name=dataset
+p1_numValues=0..1
+p1_optional=
+p1_prefix=
+p1_prefix_when_specified=
+p1_type=java.io.File
+p1_value=
+p2_MODE=
+p2_TYPE=TEXT
+p2_default_value=preprocessQuantile
+p2_description=Specify the normalization method to preprocess the data. Minfi authors suggest "preprocessFunnorm" if there exist global methylation differences between your samples (e.g. dataset with cancer and normal samples), and otherwise suggest "preprocessQuantile" if you do not expect global differences beween your samples (e.g. blood or one tissue type dataset).
+p2_fileFormat=
+p2_flag=-n 
+p2_name=normalization
+p2_numValues=0..1
+p2_optional=
+p2_prefix=
+p2_prefix_when_specified=
+p2_type=java.lang.String
+p2_value=preprocessQuantile\=preprocessQuantile;preprocessFunnorm\=preprocessFunnorm
+p3_MODE=
+p3_TYPE=TEXT
+p3_default_value=beta
+p3_description=Either beta or m-values can be provided as output.
+p3_fileFormat=
+p3_flag=-t 
+p3_name=output.type
+p3_numValues=0..1
+p3_optional=
+p3_prefix=
+p3_prefix_when_specified=
+p3_type=java.lang.String
+p3_value=beta\=beta;m-values\=m-values
+privacy=private
+quality=development
+taskDoc=
+taskType=
+userid=ckmah
+version=
