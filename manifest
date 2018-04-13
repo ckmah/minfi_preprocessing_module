@@ -6,7 +6,7 @@ LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:0037
 author=Clarence Mah;Mesirov Lab
 commandLine=<R3.2_Rscript> <libdir>run.R -d <dataset> -n <normalization> -t <output.type>
 cpuType=any
-description=Methylation array preprocessing with the R package minfi. Compatible with either 450k or EPIC array data.
+description=Methylation array preprocessing with the minfi R package. Compatible with both 450k or EPIC array data.
 fileFormat=pdf;txt
 language=R
 name=MinfiPreprocessing
@@ -14,7 +14,7 @@ os=any
 p1_MODE=IN
 p1_TYPE=FILE
 p1_default_value=
-p1_description=Provide a ZIP or GZ file containing the methylation microarray data in the Illumina Demo Dataset folder structure. See documentation for more details.
+p1_description=Provide a ZIP or GZ file containing the methylation microarray data in the Illumina Demo Dataset folder structure. Example data is provided as an option. See documentation for more details.
 p1_fileFormat=.gz;zip
 p1_flag=-d
 p1_name=dataset
@@ -23,10 +23,10 @@ p1_optional=
 p1_prefix=
 p1_prefix_when_specified=
 p1_type=java.io.File
-p1_value=
+p1_value=Illumina MethylationEPIC Demo Data Set\=ftp://webdata2:webdata2@ussd-ftp.illumina.com/downloads/productfiles/methylationEPIC/infinium-methylationepic-demo-dataset.zip
 p2_MODE=
 p2_TYPE=TEXT
-p2_default_value=preprocessQuantile
+p2_default_value=None
 p2_description=Specify the normalization method to preprocess the data. Minfi authors suggest "preprocessFunnorm" if there exist global methylation differences between your samples (e.g. dataset with cancer and normal samples), and otherwise suggest "preprocessQuantile" if you do not expect global differences beween your samples (e.g. blood or one tissue type dataset).
 p2_fileFormat=
 p2_flag=-n
@@ -36,7 +36,7 @@ p2_optional=
 p2_prefix=
 p2_prefix_when_specified=
 p2_type=java.lang.String
-p2_value=preprocessQuantile\=preprocessQuantile;preprocessFunnorm\=preprocessFunnorm;None\=None
+p2_value=Quantile Normalization\=preprocessQuantile;Functional Normalization\=preprocessFunnorm;None\=None
 p3_MODE=
 p3_TYPE=TEXT
 p3_default_value=beta
@@ -57,4 +57,4 @@ taskType=
 userid=ckmah
 version=
 
-publicationDate=04/10/2018 11\:26 
+publicationDate=04/10/2018 11\:26
