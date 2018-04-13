@@ -2,7 +2,7 @@
 #MinfiPreprocessing
 #Tue Apr 10 13:35:03 EDT 2018
 JVMLevel=
-LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00367\:999999999
+LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00373\:999999999
 author=Clarence Mah;Mesirov Lab
 commandLine=<R3.2_Rscript> <libdir>run.R -d <dataset> -n <normalization> -t <output.type>
 cpuType=any
