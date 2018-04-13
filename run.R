@@ -5,8 +5,8 @@ suppressMessages(suppressWarnings(library("minfi")))
 parser = OptionParser()
 
 parser <- add_option(parser, c("-d", "--data"), help = "zip or gzip containing DNA methylation microarray data")
-parser <- add_option(parser, c("-n", "--normalization"), default = "None", help = "normalization method")
-parser <- add_option(parser, c("-t", "--outputtype"), default = "beta", help = "beta or m-values output value type [default beta]")
+parser <- add_option(parser, c("-n", "--normalization"), help = "normalization method")
+parser <- add_option(parser, c("-t", "--outputtype"), help = "beta or m-values output value type [default beta]")
 
 args = parse_args(parser)
 
@@ -93,6 +93,6 @@ if (args$outputtype == "beta") {
 
 write.table(output.data, file.path(getwd(), "methyl.txt"), quote = FALSE, sep = "\t")
 
-write("Cleaning up intermediate files...")
+write("Cleaning up intermediate files...", stdout())
 unlink("Demo Data EPIC", recursive = TRUE)
 write("Done.", stdout())
