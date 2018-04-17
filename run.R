@@ -29,6 +29,26 @@ if (any(grepl(".csv$", list.files(data.folder)))) {
   experiment.rgset <- read.metharray.exp(base = data.folder, recursive = TRUE)
 }
 
+# Convert to MethylSet
+methyl.set <- preprocessRaw(experiment.rgset)
+
+# QC plots
+pdf("qcPlots.pdf")
+
+# Plot median log2 meth vs unmeth intensities
+qc <- getQC(methyl.set)
+plotQC(qc)
+
+# Plot Beta value distributions
+phenoData <- pData(methyl.set)
+if ("Sample_Group" %in% names(phenoData)) {
+  densityPlot(methyl.set, sampGroups = phenoData$Sample_Group)
+} else {
+  densityPlot(methyl.set)
+}
+dev.off()
+
+# Normalization function
 performPreprocessing <- function(rg.set, preprocess.method = "") {
   if (preprocess.method == "preprocessFunnorm") {
     write("Perform background subtraction with dye-bias normalization and infer between-array technical variation.",
@@ -46,29 +66,13 @@ performPreprocessing <- function(rg.set, preprocess.method = "") {
     return()
   }
 
+  # Convert to GenomicRatioSet as needed
   if (class(m.set) == "MethylSet") {
-    pdf("qcPlots.pdf")
-
-    # Plot median log2 meth vs unmeth intensities
-    qc <- getQC(m.set)
-    plotQC(qc)
-
-    # Plot Beta value distributions
-    phenoData <- pData(m.set)
-    if ("Sample_Group" %in% names(phenoData)) {
-      densityPlot(m.set, sampGroups = phenoData$Sample_Group)
-    } else {
-      densityPlot(m.set)
-    }
-    dev.off()
-
-    # Convert to GenomicRatioSet as needed
     gm.set <- mapToGenome(m.set)
     gr.set <- ratioConvert(gm.set)
   } else {
     gr.set <- m.set
   }
-
   return(gr.set)
 }
 
