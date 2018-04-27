@@ -6,9 +6,15 @@ parser = OptionParser()
 
 parser <- add_option(parser, c("-d", "--data"), help = "zip or gzip containing DNA methylation microarray data")
 parser <- add_option(parser, c("-n", "--normalization"), help = "normalization method")
-parser <- add_option(parser, c("-t", "--outputtype"), help = "beta or m-values output value type [default beta]")
+parser <- add_option(parser, c("-t", "--outputtype"), help = "beta, m-values, or MethylSet (.rds file) output value type [default beta]")
 
 args = parse_args(parser)
+
+if (args$outputtype == "MethylSet" && parser$normalization != "None") {
+  write("'None' normalization must be performed to obtain the MethylSet output type.", stdout())
+  stop()
+}
+
 
 # Path to folder containing raw experiment .IDAT files. Will read Illumina format
 # SampleSheet.csv to load data if found.
@@ -67,35 +73,42 @@ performPreprocessing <- function(rg.set, preprocess.method = "") {
   }
 
   # Convert to GenomicRatioSet as needed
-  if (class(m.set) == "MethylSet") {
+  if (class(m.set) == "MethylSet" && args$outputtype != "MethylSet") {
     gm.set <- mapToGenome(m.set)
     gr.set <- ratioConvert(gm.set)
+    return(gr.set)
   } else {
-    gr.set <- m.set
+    return(m.set)
   }
-  return(gr.set)
 }
 
-gr.set <- performPreprocessing(experiment.rgset, args$normalization)
+output.set <- performPreprocessing(experiment.rgset, args$normalization)
 
 write("Removing loci with SNPs...", stdout())
-snps <- getSnpInfo(gr.set)
-gr.set <- addSnpInfo(gr.set)
-gr.set <- dropLociWithSnps(gr.set, snps = c("SBE", "CpG"))
+snps <- getSnpInfo(output.set)
+output.set <- addSnpInfo(output.set)
+output.set <- dropLociWithSnps(output.set, snps = c("SBE", "CpG"))
 
 # Convert to output format
 write("Saving output...", stdout())
 if (args$outputtype == "beta") {
-  output.data <- getBeta(gr.set)
+  output.data <- getBeta(output.set)
 } else if (args$outputtype == "m-values") {
-  output.data <- getM(gr.set)
+  output.data <- getM(output.set)
+} else if (args$outputtype == "MethylSet") {
+  output.data <- output.set
 } else {
-  write("Output file format not recognized. Available formats: 'beta','m-values'",
+  write("Output file format not recognized. Available formats: 'beta', 'm-values', or 'MethylSet'",
     stdout())
   return()
 }
 
-write.table(output.data, file.path(getwd(), "methyl.txt"), quote = FALSE, sep = "\t")
+# Write to file as appropriate
+if (class(output.data) == "MethylSet") {
+  saveRDS(output.data, "methyl_set.rds")
+} else {
+  write.table(output.data, file.path(getwd(), paste("methyl-", args$outputtype, ".txt", sep="")), quote = FALSE, sep = "\t")
+}
 
 write("Cleaning up intermediate files...", stdout())
 unlink("Demo Data EPIC", recursive = TRUE)

@@ -39,7 +39,7 @@ p2_value=preprocessQuantile\=Quantile\ Normalization;preprocessFunnorm\=Function
 p3_MODE=
 p3_TYPE=TEXT
 p3_default_value=beta
-p3_description=Either beta or m-values can be provided as output.
+p3_description=Either beta, m-values, or MethylSet class R object can be provided as output. The MethylSet output type option only works when the normalization option is None.
 p3_fileFormat=
 p3_flag=-t
 p3_name=output.type
@@ -48,7 +48,7 @@ p3_optional=
 p3_prefix=
 p3_prefix_when_specified=
 p3_type=java.lang.String
-p3_value=beta\=beta;m-values\=m-values
+p3_value=beta\=beta;m-values\=m-values;MethylSet\=MethylSet
 privacy=private
 quality=development
 taskDoc=http\://software.broadinstitute.org/cancer/software/genepattern/modules/docs/MinfiPreprocessing/1
