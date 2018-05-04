@@ -15,7 +15,6 @@ if (args$outputtype == "MethylSet" && args$normalization != "None") {
   stop()
 }
 
-
 # Path to folder containing raw experiment .IDAT files. Will read Illumina format
 # SampleSheet.csv to load data if found.
 unzip(args$data)  # extract
@@ -84,10 +83,12 @@ performPreprocessing <- function(rg.set, preprocess.method = "") {
 
 output.set <- performPreprocessing(experiment.rgset, args$normalization)
 
-write("Removing loci with SNPs...", stdout())
-snps <- getSnpInfo(output.set)
-output.set <- addSnpInfo(output.set)
-output.set <- dropLociWithSnps(output.set, snps = c("SBE", "CpG"))
+if (args$outputtype != "MethylSet") {
+  write("Removing loci with SNPs...", stdout())
+  snps <- getSnpInfo(output.set)
+  output.set <- addSnpInfo(output.set)
+  output.set <- dropLociWithSnps(output.set, snps = c("SBE", "CpG"))
+}
 
 # Convert to output format
 write("Saving output...", stdout())
