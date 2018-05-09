@@ -1,5 +1,6 @@
 suppressMessages(suppressWarnings(library("optparse")))
 suppressMessages(suppressWarnings(library("minfi")))
+suppressMessages(suppressWarnings(library("utils")))
 
 # Parse input arguments
 parser = OptionParser()
@@ -17,9 +18,26 @@ if (args$outputtype == "MethylSet" && args$normalization != "None") {
 
 # Path to folder containing raw experiment .IDAT files. Will read Illumina format
 # SampleSheet.csv to load data if found.
-unzip(args$data)  # extract
-data.paths <- unzip(args$data, list = TRUE)  # list extracted
-data.folder <- paste(getwd(), strsplit(data.paths[[1]][1], "/")[[1]][1], sep = "/")
+if (endsWith(args$data, ".tar.gz")) {
+  untar(args$data, exdir = "rawdata")
+  data.paths <- paste("rawdata", untar(args$data, exdir = "rawdata", list = TRUE), sep = "/")
+} else if (endsWith(args$data, ".gz")) {
+  gunzip(args$data, exdir = "rawdata")
+  data.paths <- paste("rawdata", gunzip(args$data, exdir = "rawdata", list = TRUE), sep = "/")
+} else if (endsWith(args$data, ".zip")) {
+  unzip(args$data, exdir = "rawdata")
+  data.paths <- paste("rawdata", unzip(args$data, exdir = "rawdata", list = TRUE), sep = "/")
+} else {
+  write("Only tar.gz, .gz, and .zip archive file extensions are supported.", stdout())
+  stop()
+}
+
+# Read one directory down if top of archive is a single folder
+if (length(data.paths) == 1) {
+  data.folder <- paste(getwd(), "rawdata", strsplit(data.paths[[1]], "/")[[1]], sep = "/")
+} else {
+  data.folder <- paste(getwd(), "rawdata", sep = "/")
+}
 
 # Try Load sample sheet
 if (any(grepl(".csv$", list.files(data.folder)))) {
@@ -112,5 +130,5 @@ if (class(output.data) == "MethylSet") {
 }
 
 write("Cleaning up intermediate files...", stdout())
-unlink("Demo Data EPIC", recursive = TRUE)
+unlink("rawdata", recursive = TRUE)
 write("Done.", stdout())
