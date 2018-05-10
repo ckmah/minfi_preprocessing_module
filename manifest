@@ -11,6 +11,7 @@ fileFormat=pdf;txt
 language=R
 name=MinfiPreprocessing
 os=any
+job.docker.image=genepattern/docker-r-3-4-MethylationAnalysis
 p1_MODE=IN
 p1_TYPE=FILE
 p1_default_value=
