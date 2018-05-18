@@ -3,3 +3,4 @@ qcPlots.pdf
 infinium-methylationepic-demo-dataset.zip
 methyl*.txt
 build/*
+*.rds
