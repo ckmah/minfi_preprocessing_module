@@ -2,7 +2,7 @@
 #MinfiPreprocessing
 #Tue Apr 10 13:35:03 EDT 2018
 JVMLevel=
-LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00373\:999999999
+LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00373\:1.0.0
 author=Clarence Mah;Mesirov Lab
 commandLine=<R3.2_Rscript> <libdir>run.R -d <dataset> -n <normalization> -t <output.type>
 cpuType=any
@@ -11,11 +11,12 @@ fileFormat=pdf;txt
 language=R
 name=MinfiPreprocessing
 os=any
-job.docker.image=genepattern/docker-r-3-4-MethylationAnalysis
+job.memory=8Gb
+job.docker.image=genepattern/docker-r-3-4-MethylationAnalysis:0.15
 p1_MODE=IN
 p1_TYPE=FILE
 p1_default_value=
-p1_description=Provide a ZIP or GZ file containing the methylation microarray data in the Illumina Demo Dataset folder structure. Example data can be found here: ftp://webdata2:webdata2@ussd-ftp.illumina.com/downloads/productfiles/methylationEPIC/infinium-methylationepic-demo-dataset.zip. See documentation for more details.
+p1_description=Provide a ZIP or GZ file containing the methylation microarray data in the Illumina Demo Dataset folder structure. See documentation for more details.
 p1_fileFormat=.gz;zip
 p1_flag=-d
 p1_name=dataset
@@ -31,8 +32,7 @@ p2_description=Specify the normalization method to preprocess the data. Minfi au
 p2_fileFormat=
 p2_flag=-n
 p2_name=normalization
-p2_numValues=0..1
-p2_optional=
+p2_numValues=0..12_optional=
 p2_prefix=
 p2_prefix_when_specified=
 p2_type=java.lang.String
@@ -50,9 +50,9 @@ p3_prefix=
 p3_prefix_when_specified=
 p3_type=java.lang.String
 p3_value=beta\=beta;m-values\=m-values;MethylSet\=MethylSet
-privacy=private
-quality=development
-taskDoc=http\://software.broadinstitute.org/cancer/software/genepattern/modules/docs/MinfiPreprocessing/1
+privacy=public
+quality=production
+taskDoc=doc.html
 taskType=
 userid=ckmah
 version=
