@@ -4,3 +4,6 @@ infinium-methylationepic-demo-dataset.zip
 methyl*.txt
 build/*
 *.rds
+gpunit
+jobResults
+reports

@@ -28,15 +28,16 @@ p1_type=java.io.File
 p2_MODE=
 p2_TYPE=TEXT
 p2_default_value=None
-p2_description=Specify the normalization method to preprocess the data. Minfi authors suggest "Functional Normalization" if there exist global methylation differences between your samples (e.g. dataset with cancer and normal samples), and otherwise suggest "Quantile Normalization" if you do not expect global differences between your samples (e.g. blood or one tissue type dataset).
+p2_description=Specify the normalization method to preprocess the data. Minfi authors suggest "Functional Normalization" if there exist global methylation differences between your samples (e.g. dataset with cancer and normal samples), and otherwise suggest "Quantile Normalization" if you do not expect global differences between your samples (e.g. blood or one tissue type dataset). "Illumina Preprocessing" performs background subtraction and control normalization as available in GenomeStudio.
 p2_fileFormat=
 p2_flag=-n
 p2_name=normalization
-p2_numValues=0..12_optional=
+p2_numValues=0..1
+p2_optional=
 p2_prefix=
 p2_prefix_when_specified=
 p2_type=java.lang.String
-p2_value=preprocessQuantile\=Quantile\ Normalization;preprocessFunnorm\=Functional\ Normalization;None\=None
+p2_value=preprocessQuantile\=Quantile\ Normalization;preprocessFunnorm\=Functional\ Normalization;preprocessIllumina\=Illumina\ Preprocessing;None\=None
 p3_MODE=
 p3_TYPE=TEXT
 p3_default_value=beta

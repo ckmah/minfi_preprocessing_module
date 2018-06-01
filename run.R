@@ -80,7 +80,10 @@ performPreprocessing <- function(rg.set, preprocess.method = "") {
   } else if (preprocess.method == "preprocessQuantile") {
     write("Perform stratified quantile normalization.", stdout())
     m.set <- preprocessQuantile(rg.set)
-  } else if (preprocess.method == "None") {
+  } else if (preprocess.method == "preprocessIllumina") {
+    write("Perform background subtraction and control normalization as implemented by Illumina's GenomeStudio.", stdout())
+    m.set <- preprocessIllumina(rg.set)
+  }else if (preprocess.method == "None") {
     write("Preprocessing without normalization.", stdout())
     m.set <- preprocessRaw(rg.set)
   } else {
