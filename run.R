@@ -11,8 +11,8 @@ parser <- add_option(parser, c("-t", "--outputtype"), help = "beta, m-values, or
 
 args = parse_args(parser)
 
-if (args$outputtype == "MethylSet" && args$normalization != "None") {
-  write("'None' normalization must be performed to obtain the MethylSet output type.", stdout())
+if (args$outputtype == "MethylSet" && args$normalization != "None" && args$normalization != "preprocessIllumina") {
+  write("'None' or 'preprocessIllumina' normalization must be performed to obtain the MethylSet output type.", stdout())
   stop()
 }
 

@@ -41,7 +41,7 @@ p2_value=preprocessQuantile\=Quantile\ Normalization;preprocessFunnorm\=Function
 p3_MODE=
 p3_TYPE=TEXT
 p3_default_value=beta
-p3_description=Either beta, m-values, or MethylSet class R object can be provided as output. The MethylSet output type option only works when the normalization option is None.
+p3_description=Either beta, m-values, or MethylSet class R object can be provided as output. The MethylSet output type option only works with "Preprocessing Illumina" or "None" normalization options.
 p3_fileFormat=
 p3_flag=-t
 p3_name=output.type
